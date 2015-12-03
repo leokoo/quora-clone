@@ -21,6 +21,9 @@ gem 'pg'
 # Adding rake for management
 gem 'rake'
 
+# Adding gem for encryption
+gem 'bcrypt'
+
 # Adding rspec for running unit testing
 gem 'rspec'
 

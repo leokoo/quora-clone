@@ -1,12 +1,12 @@
 # Create
 # Creating the new user
 post '/signup' do 
-	user = User.new(name: params[:name], email: params[:email], password: params[:password])
+	user = User.new(name: params[:name], email: params[:email], password: params[:password], password_confirmation: params[:password_confirmation])
 	if user.save
 		redirect "users/#{user.id}"
 	else
 		@warning = "Sign up failed, invalid details, please retry"
-		redirect "users/login/?warning_msg=#{@warning}"
+		erb :"users/login"
 	end
 end
 
@@ -26,12 +26,6 @@ end
 
 # Read the route for user signup
 get '/users/login' do
-	erb :"users/login"
-end
-
-# Read the route for user login v2
-get '/users/login/' do
-	@warning = params[:warning_msg] if params[:warning_msg]
 	erb :"users/login"
 end
 
