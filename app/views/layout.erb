@@ -10,7 +10,8 @@
       	<nav>
 		      <ul>
 		        <li><a href="/">Home</a></li>
-            <%= logged_in? %>
+            <% if logged_in? %>
+            <% end %>
 		        <li><a href="/users/login">Login</a></li>
             <li><a href="#">Profile</a></li>
 		      </ul>
