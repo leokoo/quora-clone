@@ -13,9 +13,14 @@ end
 # Read
 # Reading the user login
 post '/users/login' do
-	user = User.find_by(email: params[:email], password: params[:password])
-	session[:user_id] = user.id
-	redirect "/users/#{user.id}"
+	user = User.authenticate(params[:email], params[:password])
+	if user
+		session[:user_id] = user.id
+		redirect "/users/#{user.id}"
+	else
+		@warning = "Login failed, invalid details, please retry"
+		erb :"users/login"
+	end
 end
 
 # User logout

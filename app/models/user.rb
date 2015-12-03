@@ -10,4 +10,8 @@ class User < ActiveRecord::Base
 		format: { :with => /\w+(.)*\w+@\w+(.)*\w+/}
 	validates :name, uniqueness: true
 	
+	def self.authenticate(email, password)
+		# puts email
+		User.find_by(email: email).try(:authenticate, password)
+	end
 end

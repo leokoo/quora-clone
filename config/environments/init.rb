@@ -21,6 +21,9 @@ require 'bcrypt'
 	# embedded ruby
 require 'erb'
 require 'uri'
+
+#debugging
+require 'byebug'
 ######################################################################
 
 
