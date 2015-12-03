@@ -7,8 +7,14 @@ helpers do
 		end
 	end
 
+	byebug
+
 	# Return true if current_user exist, false others
 	def logged_in?
 		!current_user.nil?
+	end
+
+	def users?
+		session[:user_id]
 	end
 end
