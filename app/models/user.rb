@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
 	validates :email, 
 		uniqueness: true,
 		format: { :with => /\w+(.)*\w+@\w+(.)*\w+/}
-	validates :name, uniqueness: true
+	validates :password, length: { minimum: 4 }
 	
 	def self.authenticate(email, password)
 		# puts email

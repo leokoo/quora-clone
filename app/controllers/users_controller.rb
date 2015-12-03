@@ -5,7 +5,7 @@ post '/signup' do
 	if user.save
 		redirect "users/#{user.id}"
 	else
-		@warning = "Sorry bro, there's something wrong with your details"
+		@warning = "Sorry, there's something wrong with your details"
 		erb :"users/login"
 	end
 end
@@ -18,7 +18,7 @@ post '/users/login' do
 		session[:user_id] = user.id
 		redirect "/users/#{user.id}"
 	else
-		@warning = "Login failed, please try again :)"
+		@warning = "Login failed, please try again"
 		erb :"users/login"
 	end
 end
@@ -48,17 +48,3 @@ get '/users/:id/edit' do
 end 
 
 # Delete
-
-helpers do 
-	# This will return the current user, if they exit
-	# Replace with code that works with your application
-	def current_user
-		if session[:user_id]
-			@current_user ||= User.find_by_id(session[:user_id])
-		end
-	end
-	# Return true if current_user exist, false others
-	def logged_in?
-		!current_user.nil?
-	end
-end
