@@ -1,0 +1,13 @@
+<h1>User Profile</h1>
+
+Name: <%= @user.name %><br>
+Email: <%= @user.email %><br>
+Biography: <%= @user.bio %><br>
+
+<a href="/users/<%= @user.id %>/edit">
+<Button>Edit Profile</Button>
+</a>
+
+<a href="/users/logout">
+<Button>Logout</Button>
+</a>
