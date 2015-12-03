@@ -5,7 +5,7 @@ post '/signup' do
 	if user.save
 		redirect "users/#{user.id}"
 	else
-		@warning = "Sign up failed, invalid details, please retry"
+		@warning = "Sorry bro, there's something wrong with your details"
 		erb :"users/login"
 	end
 end
@@ -18,7 +18,7 @@ post '/users/login' do
 		session[:user_id] = user.id
 		redirect "/users/#{user.id}"
 	else
-		@warning = "Login failed, invalid details, please retry"
+		@warning = "Login failed, please try again :)"
 		erb :"users/login"
 	end
 end
