@@ -1,3 +1,13 @@
+# Display new question form
+get '/questions/new' do
+	erb :"questions/new"
+end
+
+# View All Questions
+get '/questions/all' do
+	erb :"questions/all"
+end
+
 # Create new question
 post '/questions' do
 	question = Question.new(title: params[:title], user_id: session[:user_id])
@@ -10,14 +20,10 @@ post '/questions' do
 	# redirect "/users/#{question.user_id}"
 end
 
-# Display new question form
-get '/questions/new' do
-	erb :"questions/new"
-end
-
-# View All Questions
-get '/questions/all' do
-	erb :"questions/all"
+# View question
+get '/questions/:id' do
+	@question = Question.find(params[:id])
+	erb :'questions/show'
 end
 
 # Display question edit form
@@ -26,16 +32,10 @@ get '/questions/:id/edit' do
 	erb :'questions/edit'
 end 
 
-# View question
-get '/questions/:id' do
-	@question = Question.find(params[:id])
-	erb :'questions/show'
-end
-
 # Update question
 patch '/questions/:id' do
 	question = Question.find(params[:id])
-	question.update(title: params[:title], user_id: session[:user_id])
+	question.update(title: params[:title])
 	redirect "/questions/#{question.id}"
 end
 

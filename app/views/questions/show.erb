@@ -1,8 +1,15 @@
 <h1><%= @question.title %></h1>
 by <%= @question.user.name%><br>
 
-<a href="/questions/<%= @question.id %>/edit"><button>Edit question</button></a>
+<a href="/questions/<%= @question.id %>/edit">
+<button>Edit question</button>
+</a><br><br>
+
 <form action="/questions/<%= @question.id %>" method="post">
 	<input type="hidden" name="_method" value="delete">
 	<input type="submit" value="Delete">
 </form>
+
+<a href="/answers/new">
+<button>Answer question</button>
+</a>
