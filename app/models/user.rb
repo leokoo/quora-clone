@@ -15,4 +15,5 @@ class User < ActiveRecord::Base
 		User.find_by(email: email).try(:authenticate, password)
 	end
 	has_many :questions
+	has_many :answers
 end
