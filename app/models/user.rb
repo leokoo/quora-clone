@@ -14,4 +14,5 @@ class User < ActiveRecord::Base
 		# puts email
 		User.find_by(email: email).try(:authenticate, password)
 	end
+	has_many :questions
 end
