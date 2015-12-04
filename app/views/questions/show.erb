@@ -3,13 +3,17 @@ by <%= @question.user.name%><br>
 
 <a href="/questions/<%= @question.id %>/edit">
 <button>Edit question</button>
-</a><br><br>
+</a>
 
 <form action="/questions/<%= @question.id %>" method="post">
 	<input type="hidden" name="_method" value="delete">
 	<input type="submit" value="Delete">
 </form>
 
-<a href="/answers/new">
-<button>Answer question</button>
-</a>
+<p> Answer the question</p>
+<form action="/answers" method="POST">
+	<label>Answer: </label>
+	<input type="hidden" name="question_id" value="<%= @question.id %>">
+	<input type="text" name="reply"><br>
+	<input type="submit" value="Post it">
+</form>

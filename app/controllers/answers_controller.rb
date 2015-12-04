@@ -1,12 +1,9 @@
 # Create new answer
 post '/answers' do
-	answer = Answer.new(reply: params[:reply], user_id: session[:user_id], question: params[:question])
-	if answer.save
-	redirect "/users/#{answer.user_id}"
-	else
-		@warning = "Sorry, there's something wrong with your question"
-		erb :"answers/new"
-	end
+
+	answer = Answer.create(reply: params[:reply], user_id: session[:user_id], question_id: params[:question_id])
+		redirect "/questions/#{answer.question.id}"
+		# erb :"answers/new"
 end
 
 # Display new question form
