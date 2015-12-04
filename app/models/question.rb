@@ -1,8 +1,6 @@
 class Question < ActiveRecord::Base
 	# This is Sinatra! Remember to create a migration!
-
-	validates :question, 
-		length: { minimum: 8 }
-
+	validates :title,
+		presence: true
 	belongs_to :user
 end

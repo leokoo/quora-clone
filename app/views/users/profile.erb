@@ -3,6 +3,14 @@
 Name: <%= @user.name %><br>
 Email: <%= @user.email %><br>
 Biography: <%= @user.bio %><br>
+Question(s):<br><br>
+<% i = 1 %>
+<% @user.questions.each do |question| %>
+	<%= i %><%= " " %>
+	<a href="/questions/<%= question.id %>"><%= question.title %></a>
+	<br>
+	<% i += 1 %>
+	<% end %>
 
 <a href="/users/<%= @user.id %>/edit">
 <Button>Edit Profile</Button>

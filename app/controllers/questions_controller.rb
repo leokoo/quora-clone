@@ -5,8 +5,14 @@ end
 
 # Create new question
 post '/questions' do
-	question = Question.create(title: params[:title], user_id: session[:user_id])
-	redirect "/questions/#{question.id}"
+	question = Question.new(title: params[:title], user_id: session[:user_id])
+	if question.save
+	redirect "/users/#{question.user_id}"
+	else
+		@warning = "Sorry, there's something wrong with your question"
+		erb :"questions/new"
+	end
+	# redirect "/users/#{question.user_id}"
 end
 
 # Display question edit form
@@ -32,5 +38,5 @@ end
 # View question
 get '/questions/:id' do
 	@question = Question.find(params[:id])
-	erb :'question/show'
+	erb :'questions/show'
 end
