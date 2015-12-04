@@ -11,9 +11,10 @@
 		      <ul>
 		        <li><a href="/">Home</a></li>
             <% if logged_in? %>
-            <% end %>
+            <li><a href="/users/<%= current_user.id %>">Profile</a></li>
+            <% else %>
 		        <li><a href="/users/login">Login</a></li>
-            <li><a href="#">Profile</a></li>
+            <% end %>
 		      </ul>
 		    </nav>
     </header>

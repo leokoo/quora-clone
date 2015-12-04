@@ -1,5 +1,4 @@
 helpers do 
-enable :sessions
 	# This will return the current user, if they exit
 	def current_user
 		if session[:user_id]
