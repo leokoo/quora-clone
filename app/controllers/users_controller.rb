@@ -40,11 +40,12 @@ get '/users/:id' do
 	erb :'users/profile'
 end
 
-# Update
 # Display user edit form
 get '/users/:id/edit' do
 	@user = User.find(params[:id])
 	erb :'users/edit'
 end 
+
+# Update
 
 # Delete

@@ -1,0 +1,8 @@
+<h1>Edit Question</h1>
+
+<form action="/question/<%= @question.id %>" method="post">
+	<input type="hidden" name="_method" value="patch">
+	<label>Question: </label>
+	<input type="text" name="question" value="<%= @question.title%>"><br>
+	<input type="submit" value="Update question">
+</form>
