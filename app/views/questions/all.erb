@@ -9,21 +9,25 @@
 <br>
 	Vote eligibility? :
 	<% question.votes.each do |vote| %>
-		<% if vote.user_id == session[:user_id] %>
+session <%= session[:user_id] %>
+user_id <%= vote.user_id %>
+		<% if question.votes.count == 0 %>
+			<% @can_vote = true %>
+			<% break %>
+		<% elsif vote.user_id == session[:user_id] %>
 			<% @can_vote = false %>
 			<% break %>
 		<% else %>
 			<% @can_vote = true %>
 		<% end %>
 	<% end %>
-<%= @can_vote %> <br>
+<%= @can_vote %><br>
 
-	<% if @can_vote == true %>
 		<a href="/questions/<%= question.id %>/upvote"><button>upvote</button></a>
 		<a href="/questions/<%= question.id %>/downvote"><button>downvote</button></a><br>
-	<% else %>
-		You cannot double vote
-	<% end %><br>
+
+
+
 
 	Total Vote(s): <%= question.votes.count %><br> 
 	Total Upvote(s): <%= question.votes.where(vote_count: 1).count %><br>
