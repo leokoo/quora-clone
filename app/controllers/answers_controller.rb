@@ -5,27 +5,22 @@ post '/answers' do
 		# erb :"answers/new"
 end
 
-# Display new question form
-get '/answers/new' do
-	erb :"answers/new"
+# View All Answers
+get '/answers/all' do
+	erb :"answers/all"
 end
 
-# # View All Questions
-# get '/questions/all' do
-# 	erb :"questions/all"
-# end
+# View answer
+get '/answers/:id' do
+	@answer = Answer.find(params[:id])
+	erb :'answers/show'
+end
 
-# # Display question edit form
-# get '/questions/:id/edit' do
-# 	@question = Question.find(params[:id])
-# 	erb :'questions/edit'
-# end 
-
-# # View question
-# get '/questions/:id' do
-# 	@question = Question.find(params[:id])
-# 	erb :'questions/show'
-# end
+# Display answer edit form
+get '/answers/:id/edit' do
+	@answer = Answer.find(params[:id])
+	erb :'answers/edit'
+end 
 
 # # Update question
 # patch '/questions/:id' do

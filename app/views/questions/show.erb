@@ -11,10 +11,13 @@ by <%= @question.user.name%><br>
 </form>
 
 <h3>Answers</h3>
+<% i = 1 %>
 <% answers = Answer.all %>
 <% answers.each do |answer| %>
 	<% if answer.question_id == @question.id %>
-		<%= answer.reply %><br>
+	<%= i %>
+	<a href="/answers/<%= answer.id %>"><%= answer.reply %></a><br>
+	<% i += 1 %>
 	<% end %>
 <% end %>
 
