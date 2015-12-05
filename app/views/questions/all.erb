@@ -10,13 +10,18 @@
 	<a href="/questions/<%= question.id %>/upvote"><button>upvote</button></a>
 	<a href="/questions/<%= question.id %>/downvote"><button>downvote</button></a><br>
 	ID of voter:
-
 	<% question.votes.each do |vote| %>
 		<%= vote.user_id %>
+		<% if vote.user_id == session[:user_id] %>
+		<%= vote.user.name %> have already voted <br>
+		<% break %>
+		<% end %>
 	<% end %><br>
-	Total Vote(s): <%= question.votes.count %>	<br> 
-	Total Upvote(s): <%= question.votes.where(vote_count: 1).count %>	 <br>
-	Total Downvote(s)	<%= question.votes.where(vote_count: -1).count %> <br>
+<br>
+	Current logged in user = <%= question.user.name %> <br>
+	Total Vote(s): <%= question.votes.count %><br> 
+	Total Upvote(s): <%= question.votes.where(vote_count: 1).count %><br>
+	Total Downvote(s)	<%= question.votes.where(vote_count: -1).count %><br>
 	<br>
 	<% i += 1 %>
 	<% end %>
