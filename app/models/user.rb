@@ -16,4 +16,5 @@ class User < ActiveRecord::Base
 	end
 	has_many :questions
 	has_many :answers
+	has_many :question_votes
 end
