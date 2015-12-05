@@ -10,16 +10,13 @@
 	<a href="/questions/<%= question.id %>/upvote"><button>upvote</button></a>
 	<a href="/questions/<%= question.id %>/downvote"><button>downvote</button></a><br>
 	ID of voter:
-	<% votarray = [] %>
+
 	<% question.votes.each do |vote| %>
 		<%= vote.user_id %>
-		<% votarray << vote.user_id %>
 	<% end %><br>
-
-
 	Total Vote(s): <%= question.votes.count %>	<br> 
-	Total Upvote(s): <%=     %>	 <br>
-	Total Downvote(s)	<%=     %> <br>
+	Total Upvote(s): <%= question.votes.where(vote_count: 1).count %>	 <br>
+	Total Downvote(s)	<%= question.votes.where(vote_count: -1).count %> <br>
 	<br>
 	<% i += 1 %>
 	<% end %>
