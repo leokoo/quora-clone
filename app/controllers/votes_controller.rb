@@ -9,4 +9,14 @@ post '/vote/downvote' do
 	erb :'questions/all'
 end
 
+get "/questions/:id/upvote" do
+	question_vote = Vote.create(user_id: session[:user_id], question_id: params[:id], vote_count: 1)
+	erb :'questions/all'
+end
+
+get "/questions/:id/downvote" do
+	question_vote = Vote.create(user_id: session[:user_id], question_id: params[:id], vote_count: -1)
+	erb :'questions/all'
+end
+
 # Total Votes

@@ -6,17 +6,7 @@
 	<a href="/questions/<%= question.id %>"><%= question.title %></a>
 	by <%= question.user.name%>
 
-	<form action="/vote/upvote" method="POST">
-		<input type="hidden" name="question_id" value="<%= question.id %>">
-		<input type="submit" value="upvote">
-	</form> 
-
-	<form action="/vote/downvote" method="POST">
-		<input type="hidden" name="question_id" value="<%= question.id %>">
-		<input type="submit" value="downvote">
-	</form>
-
-	<a href="/vote/upvote"><button>upvote</button></a>
-	<a href="#"><button>downvote</button></a>
+	<a href="/questions/<%= question.id %>/upvote"><button>upvote</button></a>
+	<a href="/questions/<%= question.id %>/downvote"><button>downvote</button></a>
 	<% i += 1 %>
 	<% end %>
