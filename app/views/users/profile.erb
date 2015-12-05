@@ -11,6 +11,14 @@ Question(s):<br><br>
 	<br>
 	<% i += 1 %>
 	<% end %>
+<br>Answers(s)<br>
+<% i = 1 %>
+<% @user.answers.each do |answer| %>
+	<%= i %><%= " " %>
+	<a href="/answers/<%= answer.id %>"><%= answer.reply %></a>
+	<br>
+	<% i += 1 %>
+	<% end %>
 
 <a href="/users/<%= @user.id %>/edit">
 <Button>Edit Profile</Button>
