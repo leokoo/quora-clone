@@ -10,6 +10,15 @@ by <%= @question.user.name%><br>
 	<input type="submit" value="Delete">
 </form>
 
+<h3>Answers</h3>
+<% answers = Answer.all %>
+<% answers.each do |answer| %>
+	<% if answer.question_id == @question.id %>
+		<%= answer.reply %><br>
+	<% end %>
+<% end %>
+
+
 <p> Answer the question</p>
 <form action="/answers" method="POST">
 	<label>Answer: </label>

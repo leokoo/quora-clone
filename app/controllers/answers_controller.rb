@@ -1,6 +1,5 @@
 # Create new answer
 post '/answers' do
-
 	answer = Answer.create(reply: params[:reply], user_id: session[:user_id], question_id: params[:question_id])
 		redirect "/questions/#{answer.question.id}"
 		# erb :"answers/new"
