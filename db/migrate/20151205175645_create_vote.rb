@@ -1,6 +1,6 @@
-class CreateQuestionVote < ActiveRecord::Migration
+class CreateVote < ActiveRecord::Migration
 	def change
-		create_table :question_votes do |t|
+		create_table :votes do |t|
 			t.integer :upvote
 			t.integer :downvote
 			t.integer :vote_count

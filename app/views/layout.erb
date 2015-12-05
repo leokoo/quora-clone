@@ -9,14 +9,14 @@
       <%= @warning if @warning %>
       	<nav>
 		      <ul>
-		        <li><a href="/">Home</a></li>
-            <li><a href="/questions/all">View All Questions</a></li>
+		        <li><a href="/"><button>Home</button></a></li>
+            <li><a href="/questions/all"><button>View All Questions</button></a></li>
             <% if logged_in? %>
-            <li><a href="/users/<%= current_user.id %>">Profile</a></li>
-            <li><a href="/questions/new">Post a question</a></li>
-            <li><a href="/users/logout">Logout</a></li>
+            <li><a href="/users/<%= current_user.id %>"><button>Profile</button></a></li>
+            <li><a href="/questions/new"><button>Post a question</button></a></li>
+            <li><a href="/users/logout"><button>Logout</button></a></li>
             <% else %>
-		        <li><a href="/users/login">Login</a></li>
+		        <li><a href="/users/login"><button>Login</button></a></li>
             <% end %>
 		      </ul>
 		    </nav>

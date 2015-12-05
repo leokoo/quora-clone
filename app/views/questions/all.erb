@@ -5,6 +5,15 @@
 	<%= i %><%= " " %>
 	<a href="/questions/<%= question.id %>"><%= question.title %></a>
 	by <%= question.user.name%>
-	<br>
+
+	<form action="/vote/upvote" method="POST">
+		<input type="hidden" name="question_id" value="<%= question.id %>">
+		<input type="submit" value="upvote">
+	</form> 
+
+	<form action="/vote/downvote" method="POST">
+		<input type="hidden" name="question_id" value="<%= question.id %>">
+		<input type="submit" value="downvote">
+	</form>
 	<% i += 1 %>
 	<% end %>
