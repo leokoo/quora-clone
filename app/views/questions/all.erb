@@ -3,22 +3,28 @@
 <% questions = Question.all %> 
 <% @votes = Vote.all %>
 <% questions.each do |question| %>
-	<%= i %><%= " " %>
+	<%= "#{i})" %>
 	<a href="/questions/<%= question.id %>"><%= question.title %></a>
 	by <%= question.user.name%>
-
-	<a href="/questions/<%= question.id %>/upvote"><button>upvote</button></a>
-	<a href="/questions/<%= question.id %>/downvote"><button>downvote</button></a><br>
-	ID of voter:
-	<% question.votes.each do |vote| %>
-		<%= vote.user_id %>
-		<% if vote.user_id == session[:user_id] %>
-		<%= vote.user.name %> have already voted <br>
-		<% break %>
-		<% end %>
-	<% end %><br>
 <br>
-	Current logged in user = <%= question.user.name %> <br>
+	Vote eligibility? :
+	<% question.votes.each do |vote| %>
+		<% if vote.user_id == session[:user_id] %>
+			<% @can_vote = false %>
+			<% break %>
+		<% else %>
+			<% @can_vote = true %>
+		<% end %>
+	<% end %>
+<%= @can_vote %> <br>
+
+	<% if @can_vote == true %>
+		<a href="/questions/<%= question.id %>/upvote"><button>upvote</button></a>
+		<a href="/questions/<%= question.id %>/downvote"><button>downvote</button></a><br>
+	<% else %>
+		You cannot double vote
+	<% end %><br>
+
 	Total Vote(s): <%= question.votes.count %><br> 
 	Total Upvote(s): <%= question.votes.where(vote_count: 1).count %><br>
 	Total Downvote(s)	<%= question.votes.where(vote_count: -1).count %><br>
