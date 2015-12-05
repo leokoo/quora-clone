@@ -1,12 +1,25 @@
 <h2> List of questions posted </h2>
 <% i = 1 %>
 <% questions = Question.all %> 
+<% @votes = Vote.all %>
 <% questions.each do |question| %>
 	<%= i %><%= " " %>
 	<a href="/questions/<%= question.id %>"><%= question.title %></a>
 	by <%= question.user.name%>
 
 	<a href="/questions/<%= question.id %>/upvote"><button>upvote</button></a>
-	<a href="/questions/<%= question.id %>/downvote"><button>downvote</button></a>
+	<a href="/questions/<%= question.id %>/downvote"><button>downvote</button></a><br>
+	ID of voter:
+	<% votarray = [] %>
+	<% question.votes.each do |vote| %>
+		<%= vote.user_id %>
+		<% votarray << vote.user_id %>
+	<% end %><br>
+
+
+	Total Vote(s): <%= question.votes.count %>	<br> 
+	Total Upvote(s): <%=     %>	 <br>
+	Total Downvote(s)	<%=     %> <br>
+	<br>
 	<% i += 1 %>
 	<% end %>
