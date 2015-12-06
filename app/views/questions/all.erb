@@ -8,7 +8,6 @@
 	by <%= question.user.name%>
 <br>
 Vote eligibility? :
-
 	<% if question.votes.count == 0 %>
 		<% @can_vote = true %>
 	<% elsif question.votes.count != 0 %>
@@ -22,6 +21,20 @@ Vote eligibility? :
 		<% end %>
 	<% end %>
 <%= @can_vote %><br>
+
+Do we need to reset your votes :
+	<% if question.votes.count != 0 %>
+	<% @reset_vote = true %>
+		<% question.votes.each do |vote| %>
+			<% if vote.user_id == session[:user_id] %>
+				<% vote.destroy %>
+				<% break %>
+			<% end %>
+		<% end %>
+	<% end %>
+
+<%= @reset_vote %><br>
+	
 
 		<a href="/questions/<%= question.id %>/upvote"><button>upvote</button></a>
 		<a href="/questions/<%= question.id %>/downvote"><button>downvote</button></a><br>
