@@ -10,4 +10,6 @@ get "/questions/:id/downvote" do
 	erb :'questions/all'
 end
 
-# Total Votes
+# To reset vote
+post "questions/:id/:vote/reset/" do
+end
