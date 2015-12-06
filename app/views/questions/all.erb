@@ -4,13 +4,10 @@
 <% questions = Question.all %> 
 <% questions.each do |question| %>
 	<%= "#{i})" %> <a href="/questions/<%= question.id %>"><%= question.title %></a> by <%= question.user.name%>
-<br>
 <!--Now we are going through individual questions -->
 <!--If there hasn't been a vote yet -->
 <% if question.votes.count == 0 %>
 		<% @can_vote = true %>
-		<a href="/questions/<%= question.id %>/upvote"><button>upvote</button></a>
-		<a href="/questions/<%= question.id %>/downvote"><button>downvote</button></a>
 <!--If we have votes, we need to then sort them through-->
 <% elsif question.votes.count != 0 %>
 	<% question.votes.each do |vote| %>
@@ -22,14 +19,16 @@
 			</form>
 			<% break %>
 <!--If there are no votes by the current user, he then can vote-->
-		<% else %>	
+		<% elsif vote.user_id != session[:user_id] %>	
 			<% @can_vote = true %>
-		<a href="/questions/<%= question.id %>/upvote"><button>upvote</button></a>
-		<a href="/questions/<%= question.id %>/downvote"><button>downvote</button></a>
 		<% end %>
 	<% end %>
+<% end %><br>
+
+<% if @can_vote == true %>
+	<a href="/questions/<%= question.id %>/upvote"><button>upvote</button></a>
+	<a href="/questions/<%= question.id %>/downvote"><button>downvote</button></a><br>
 <% end %>
-<%= @can_vote %><br>
 
 	Total Vote(s): <%= question.votes.count %><br> 
 	Total Upvote(s): <%= question.votes.where(vote_count: 1).count %><br>
