@@ -11,5 +11,12 @@ get "/questions/:id/downvote" do
 end
 
 # To reset vote
-post "questions/:id/:vote/reset/" do
+post "/questions/:id/:vote/reset" do
+	votes = Vote.all
+	votes.each do |vote|
+		if vote.id == params[:vote].to_i
+			vote.destroy
+		end
+	end
+	erb :'questions/all'
 end

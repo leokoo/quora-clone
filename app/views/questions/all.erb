@@ -1,40 +1,35 @@
+<!--First is to iterate though the set of questions to get individual ones -->
 <h2> List of questions posted </h2>
 <% i = 1 %>
 <% questions = Question.all %> 
-<% @votes = Vote.all %>
 <% questions.each do |question| %>
-	<%= "#{i})" %>
-	<a href="/questions/<%= question.id %>"><%= question.title %></a>
-	by <%= question.user.name%>
+	<%= "#{i})" %> <a href="/questions/<%= question.id %>"><%= question.title %></a> by <%= question.user.name%>
 <br>
-
-Vote eligibility? :
+<!--Now we are going through individual questions -->
+<!--If there hasn't been a vote yet -->
 <% if question.votes.count == 0 %>
 		<% @can_vote = true %>
-	<% elsif question.votes.count != 0 %>
-		<% question.votes.each do |vote| %>
-			<% if vote.user_id == session[:user_id] %>
- 				<% @can_vote = false %>
- 				<% break %>
-			<% else %>	
-				<% @can_vote = true %>
-			<% end %>
- 		<% end %>
- 	<% end %>
- <%= @can_vote %><br>
-	
-	<% if @can_vote == true %>
 		<a href="/questions/<%= question.id %>/upvote"><button>upvote</button></a>
-		<a href="/questions/<%= question.id %>/downvote"><button>downvote</button></a><br>
-	<% else %>
-		Please reset your vote
-		<button>reset vote</button>
-
-	<form action="/questions/<%= question.id %>/reset" method="POST">
-		<input type="submit" value="reset">
-	</form>
-
-	<% end %><br>
+		<a href="/questions/<%= question.id %>/downvote"><button>downvote</button></a>
+<!--If we have votes, we need to then sort them through-->
+<% elsif question.votes.count != 0 %>
+	<% question.votes.each do |vote| %>
+<!--If the logged in user has voted for the question, we then send the question id and vote id over to be reset-->
+		<% if vote.user_id == session[:user_id] %>
+			<% @can_vote = false %>	
+			<form action="/questions/<%= question.id %>/<%= vote.id %>/reset" method="POST">
+				<input type="submit" value="reset">
+			</form>
+			<% break %>
+<!--If there are no votes by the current user, he then can vote-->
+		<% else %>	
+			<% @can_vote = true %>
+		<a href="/questions/<%= question.id %>/upvote"><button>upvote</button></a>
+		<a href="/questions/<%= question.id %>/downvote"><button>downvote</button></a>
+		<% end %>
+	<% end %>
+<% end %>
+<%= @can_vote %><br>
 
 	Total Vote(s): <%= question.votes.count %><br> 
 	Total Upvote(s): <%= question.votes.where(vote_count: 1).count %><br>
