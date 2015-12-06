@@ -12,21 +12,18 @@ Questions count <%= questions.count %><br>
 		<% if vote.user_id == session[:user_id] %>
 			<% @can_vote = false %>	
 			<form action="/upvote/<%= question.id %>/<%= vote.id %>/reset" method="POST">
-				<input type="submit" value="upvote">
-			</form>
+				<input type="submit" value="upvote"></form>
 			<form action="/downvote/<%= question.id %>/<%= vote.id %>/reset" method="POST">
-				<input type="submit" value="downvote">
-			</form>
+				<input type="submit" value="downvote"></form>
 			<form action="/questions/<%= question.id %>/<%= vote.id %>/reset" method="POST">
-				<input type="submit" value="reset">
-			</form>
+				<input type="submit" value="reset"></form>
 			<% break %>
 		<% else vote.user_id != session[:user_id] %>
 			<% @can_vote = true %>
 		<% end %>
 	<% end %>
 <% end %><br>
-
+<!--we use the can_vote variable in order to ensure we don't get a repeat if question.votes.count == 0 -->
 <% if @can_vote == true %>
 	<a href="/questions/<%= question.id %>/upvote"><button>upvote</button></a>
 	<a href="/questions/<%= question.id %>/downvote"><button>downvote</button></a><br>
