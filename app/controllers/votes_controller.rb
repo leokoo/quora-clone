@@ -26,8 +26,7 @@ post "/upvote/:id/:vote/reset" do
 	votes = Vote.all
 	votes.each do |vote|
 		if vote.id == params[:vote].to_i
-			vote.destroy
-			Vote.create(user_id: session[:user_id], question_id: params[:id], vote_count: 1)
+			vote.update(vote_count: 1)
 		end
 	end
 	erb :'questions/all'
@@ -38,8 +37,7 @@ post "/downvote/:id/:vote/reset" do
 	votes = Vote.all
 	votes.each do |vote|
 		if vote.id == params[:vote].to_i
-			vote.destroy
-			Vote.create(user_id: session[:user_id], question_id: params[:id], vote_count: -1)
+			vote.update(vote_count: -1)
 		end
 	end
 	erb :'questions/all'
