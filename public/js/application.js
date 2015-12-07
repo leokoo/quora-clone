@@ -7,8 +7,7 @@ $(document).ready(function() {
   		method: "POST",
   		url: $(this).attr("action"),
   	}).done(function(response){
-  		debugger
-  		$("#vote-result-" + question_id).html(response)
+  		$("#vote-result-" + question_id).append(response)
   	});
 });
 });
