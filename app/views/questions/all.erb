@@ -51,6 +51,9 @@
 	<!--The form for up voting on answers -->
 	<form action="/answers/<%= answer.id %>/upvote" method="POST">
 		<input type="submit" value="a. upvote"></form>
+	<!--The form for down voting on answers -->
+	<form action="/answers/<%= answer.id %>/downvote" method="POST">
+		<input type="submit" value="a. downvote"></form>
 	<!--The form for resetting answers -->
 	<form action="/answers/<%= answer.id %>/reset" method="POST">
 		<input type="submit" value="a. reset"></form>
@@ -58,6 +61,7 @@
 	<!--To find the total amount of votes by type-->	
 	Total answer vote(s): <span id="vote-result-<%= answer.id %>"><%= answer.answer_votes.count %><br> </span>
 	Total answer upvote(s): <%= answer.answer_votes.where(vote_count: 1).count %><br>
+	Total answer downvote(s): <%= answer.answer_votes.where(vote_count: -1).count %><br>
 
 		<% end %>
 	<% end %>
