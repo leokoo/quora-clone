@@ -29,11 +29,14 @@
 	<a href="/questions/<%= question.id %>/downvote"><button class="down">downvote</button></a><br>
 <% end %>
 
-	Total Vote(s): <span id="vote-result-<%= question.id %>"><%= question.votes.count %><br> </span>
-	Total Upvote(s): <%= question.votes.where(vote_count: 1).count %><br>
-	Total Downvote(s)	<%= question.votes.where(vote_count: -1).count %><br><br>
+	<!--To show vote count(s) by type-->
+	Total question vote(s): <span id="vote-result-<%= question.id %>"><%= question.votes.count %><br> </span>
+	Total question upvote(s): <%= question.votes.where(vote_count: 1).count %><br>
+	Total question downvote(s)	<%= question.votes.where(vote_count: -1).count %><br><br>
 	<% i += 1 %>
 	<% j = 1 %>
+
+	<!-- To list all possible answers for a question -->
 	<strong>List of Answers</strong><br>
 	<% if question.answers.count == 0 %>
 		No answers yet, would you want answer it?
@@ -41,8 +44,14 @@
 		<% question_answers = question.answers %>
 		<% question_answers.each.with_index do |answer, index| %>
 			<%= index + 1 %><%= ". " %><%= answer.reply %><br>
+
+	<!--The form for voting on answers -->
 	<form action="/answers/<%= answer.id %>/upvote" method="POST" class="up" data-id="<%= answer.id %>">
 		<input type="submit" value="a. upvote"></form>
+
+	<!--To find the total amount of votes by type-->	
+	Total answer vote(s): <span id="vote-result-<%= answer.id %>"><%= answer.answer_votes.count %><br> </span>
+	Total answer upvote(s): <%= answer.answer_votes.where(vote_count: 1).count %><br>
 
 		<% end %>
 	<% end %>
