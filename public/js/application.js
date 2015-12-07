@@ -1,5 +1,8 @@
 $(document).ready(function() {
-  $("div").click(function() {
-  $("div").fadeOut('slow');
+  $("button").click(function(event) {
+  	event.preventDefault();
+  	$.ajax({
+
+  	});
 });
 });

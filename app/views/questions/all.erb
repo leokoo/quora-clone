@@ -31,7 +31,16 @@ Questions count <%= questions.count %><br>
 
 	Total Vote(s): <%= question.votes.count %><br> 
 	Total Upvote(s): <%= question.votes.where(vote_count: 1).count %><br>
-	Total Downvote(s)	<%= question.votes.where(vote_count: -1).count %><br>
-	<br>
+	Total Downvote(s)	<%= question.votes.where(vote_count: -1).count %><br><br>
 	<% i += 1 %>
-<% end %>
+	<% j = 1 %>
+	<strong>List of Answers</strong><br>
+	<% if question.answers.count == 0 %>
+		No answers yet, would you want answer it?
+	<% else %>
+		<% question_answers = question.answers %>
+		<% question_answers.each.with_index do |answer, index| %>
+			<%= index + 1 %><%= ". " %><%= answer.reply %><br>
+		<% end %>
+	<% end %>
+<br><% end %>
