@@ -5,9 +5,13 @@
 <% questions.each do |question| %>
 	<%= "#{i})" %> <a href="/questions/<%= question.id %>"><%= question.title %></a> by <%= question.user.name%>
 
+<!--If there are no votes in the question -->
 	<% if question.votes.count == 0 %>
 		<% @can_vote = true %>
+
+<!--If there are votes in the question, we isolate each vote -->		
 	<% else question.votes.each do |vote| %>
+	<!--If we get a vote that matches the logged in user-->
 		<% if vote.user_id == session[:user_id] %>
 			<% @can_vote = false %>	
 			<form action="/upvote/<%= question.id %>/<%= vote.id %>/reset" method="POST">
@@ -34,7 +38,6 @@
 	Total question upvote(s): <%= question.votes.where(vote_count: 1).count %><br>
 	Total question downvote(s)	<%= question.votes.where(vote_count: -1).count %><br><br>
 	<% i += 1 %>
-	<% j = 1 %>
 
 	<!-- To list all possible answers for a question -->
 	<strong>List of Answers</strong><br>
@@ -45,8 +48,8 @@
 		<% question_answers.each.with_index do |answer, index| %>
 			<%= index + 1 %><%= ". " %><%= answer.reply %><br>
 
-	<!--The form for voting on answers -->
-	<form action="/answers/<%= answer.id %>/upvote" method="POST" class="up" data-id="<%= answer.id %>">
+	<!--The form for up voting on answers -->
+	<form action="/answers/<%= answer.id %>/upvote" method="POST" class="answer_up" data-id="<%= answer.id %>">
 		<input type="submit" value="a. upvote"></form>
 
 	<!--To find the total amount of votes by type-->	
