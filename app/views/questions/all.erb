@@ -49,8 +49,11 @@
 			<%= index + 1 %><%= ". " %><%= answer.reply %><br>
 
 	<!--The form for up voting on answers -->
-	<form action="/answers/<%= answer.id %>/upvote" method="POST" class="answer_up" data-id="<%= answer.id %>">
+	<form action="/answers/<%= answer.id %>/upvote" method="POST">
 		<input type="submit" value="a. upvote"></form>
+	<!--The form for resetting answers -->
+	<form action="/answers/<%= answer.id %>/reset" method="POST">
+		<input type="submit" value="a. reset"></form>
 
 	<!--To find the total amount of votes by type-->	
 	Total answer vote(s): <span id="vote-result-<%= answer.id %>"><%= answer.answer_votes.count %><br> </span>
