@@ -12,6 +12,7 @@ post "/upvote/:id/:vote/reset" do
 	votes = Vote.all
 	votes.each do |vote|
 		if vote.id == params[:vote].to_i
+		byebug
 			vote.update(vote_count: 1)
 		end
 	end

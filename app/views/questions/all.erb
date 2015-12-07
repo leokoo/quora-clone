@@ -41,6 +41,9 @@
 		<% question_answers = question.answers %>
 		<% question_answers.each.with_index do |answer, index| %>
 			<%= index + 1 %><%= ". " %><%= answer.reply %><br>
+	<form action="/answers/<%= answer.id %>/upvote" method="POST" class="up" data-id="<%= answer.id %>">
+		<input type="submit" value="a. upvote"></form>
+
 		<% end %>
 	<% end %>
 <br><% end %>
