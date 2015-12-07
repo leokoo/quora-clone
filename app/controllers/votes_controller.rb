@@ -1,7 +1,8 @@
 # To upvote
-get "/questions/:id/upvote" do
+post "/questions/:id/upvote" do
 	question_vote = Vote.create(user_id: session[:user_id], question_id: params[:id], vote_count: 1)
-	erb :'questions/all'
+	# erb :'questions/all'
+	question_vote.vote_count.to_json
 end
 
 # To downvote
@@ -21,7 +22,7 @@ post "/questions/:id/:vote/reset" do
 	erb :'questions/all'
 end
 
-# To reset vote and upvote
+# To update upvote
 post "/upvote/:id/:vote/reset" do
 	votes = Vote.all
 	votes.each do |vote|
@@ -32,7 +33,7 @@ post "/upvote/:id/:vote/reset" do
 	erb :'questions/all'
 end
 
-# To reset vote and downvote
+# To update downvote
 post "/downvote/:id/:vote/reset" do
 	votes = Vote.all
 	votes.each do |vote|

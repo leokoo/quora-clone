@@ -2,7 +2,6 @@
 <h2> List of questions posted </h2>
 <% i = 1 %>
 <% questions = Question.all %>
-Questions count <%= questions.count %><br>
 <% questions.each do |question| %>
 	<%= "#{i})" %> <a href="/questions/<%= question.id %>"><%= question.title %></a> by <%= question.user.name%>
 
@@ -25,11 +24,12 @@ Questions count <%= questions.count %><br>
 <% end %><br>
 <!--we use the can_vote variable in order to ensure we don't get a repeat if question.votes.count == 0 -->
 <% if @can_vote == true %>
-	<a href="/questions/<%= question.id %>/upvote"><button class="up">upvote</button></a>
+	<form action="/questions/<%= question.id %>/upvote" method="POST" class="up" data-id="<%= question.id %>">
+		<input type="submit" value="upvote"></form>
 	<a href="/questions/<%= question.id %>/downvote"><button class="down">downvote</button></a><br>
 <% end %>
 
-	Total Vote(s): <%= question.votes.count %><br> 
+	Total Vote(s): <span id="vote-result-<%= question.id %>"><%= question.votes.count %><br> </span>
 	Total Upvote(s): <%= question.votes.where(vote_count: 1).count %><br>
 	Total Downvote(s)	<%= question.votes.where(vote_count: -1).count %><br><br>
 	<% i += 1 %>
