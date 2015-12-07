@@ -4,34 +4,12 @@
 <% questions = Question.all %>
 <% questions.each do |question| %>
 	<%= "#{i})" %> <a href="/questions/<%= question.id %>"><%= question.title %></a> by <%= question.user.name%>
-
-<!--If there are no votes in the question -->
-	<% if question.votes.count == 0 %>
-		<% @can_vote = true %>
-
-<!--If there are votes in the question, we isolate each vote -->		
-	<% else question.votes.each do |vote| %>
-	<!--If we get a vote that matches the logged in user-->
-		<% if vote.user_id == session[:user_id] %>
-			<% @can_vote = false %>	
-			<form action="/upvote/<%= question.id %>/<%= vote.id %>/reset" method="POST">
-				<input type="submit" value="upvote"></form>
-			<form action="/downvote/<%= question.id %>/<%= vote.id %>/reset" method="POST">
-				<input type="submit" value="downvote"></form>
-			<form action="/questions/<%= question.id %>/<%= vote.id %>/reset" method="POST">
-				<input type="submit" value="reset"></form>
-			<% break %>
-		<% else vote.user_id != session[:user_id] %>
-			<% @can_vote = true %>
-		<% end %>
-	<% end %>
-<% end %><br>
-<!--we use the can_vote variable in order to ensure we don't get a repeat if question.votes.count == 0 -->
-<% if @can_vote == true %>
-	<form action="/questions/<%= question.id %>/upvote" method="POST" class="up" data-id="<%= question.id %>">
-		<input type="submit" value="upvote"></form>
-	<a href="/questions/<%= question.id %>/downvote"><button class="down">downvote</button></a><br>
-<% end %>
+		<form action="/questions/<%= question.id %>/upvote" method="POST">
+			<input type="submit" value="upvote"></form>
+		<form action="/questions/<%= question.id %>/downvote" method="POST">
+			<input type="submit" value="downvote"></form>
+		<form action="/questions/<%= question.id %>/reset" method="POST">
+			<input type="submit" value="reset"></form>
 
 	<!--To show vote count(s) by type-->
 	Total question vote(s): <span id="vote-result-<%= question.id %>"><%= question.votes.count %><br> </span>
