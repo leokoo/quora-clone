@@ -9,7 +9,7 @@ Questions count <%= questions.count %><br>
 	<% if question.votes.count == 0 %>
 		<% @can_vote = true %>
 	<% else question.votes.each do |vote| %>
-		<% if vote.user_id == current_user.id %>
+		<% if vote.user_id == session[:user_id] %>
 			<% @can_vote = false %>	
 			<form action="/upvote/<%= question.id %>/<%= vote.id %>/reset" method="POST">
 				<input type="submit" value="upvote"></form>
@@ -18,7 +18,7 @@ Questions count <%= questions.count %><br>
 			<form action="/questions/<%= question.id %>/<%= vote.id %>/reset" method="POST">
 				<input type="submit" value="reset"></form>
 			<% break %>
-		<% else vote.user_id != current_user.id %>
+		<% else vote.user_id != session[:user_id] %>
 			<% @can_vote = true %>
 		<% end %>
 	<% end %>

@@ -13,3 +13,10 @@ header h1 {
 p {
   font: 13px/1.4 Helvetica, Arial, sans-serif;
 }
+
+div {
+    height: 100px;
+    width: 100px;
+    background-color: #FA6900;
+    border-radius: 5px;
+}

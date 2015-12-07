@@ -1,3 +1,5 @@
-  $(document).ready(function() {
-    $("button").addClass("animated bounce");
-  });
+$(document).ready(function() {
+  $("div").click(function() {
+  $("div").fadeOut('slow');
+});
+});
