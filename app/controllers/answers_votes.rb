@@ -5,22 +5,21 @@
 # 	# question_vote.vote_count.to_json
 # end
 
-# User.create_with(last_name: 'Johansson').find_or_create_by(first_name: 'Scarlett')
-# => #<User id: 2, first_name: "Scarlett", last_name: "Johansson">
-
+# To upvote via creating a new vote, or resetting the current vote to 1
 post "/answers/:id/upvote" do
 	answer = Answer.find(params[:id])
-	answer.answer_votes.create_with(vote_count: 1).find_or_create_by(user_id: session[:user_id])
+	answer.answer_votes.create_with(vote_count: 1).find_or_create_by(user_id: session[:user_id]).update(vote_count: 1)
 	erb :'questions/all'
 end
 
+# To upvote via creating a new vote, or resetting the current vote to -1
 post "/answers/:id/downvote" do
 	answer = Answer.find(params[:id])
-	answer.answer_votes.create_with(vote_count: -1).find_or_create_by(user_id: session[:user_id])
+	answer.answer_votes.create_with(vote_count: -1).find_or_create_by(user_id: session[:user_id]).update(vote_count: -1)
 	erb :'questions/all'
 end
 
-# To update upvote
+# To reset votes
 post "/answers/:id/reset" do
 	answer = Answer.find(params[:id])
 	answer.answer_votes.where(user_id: current_user.id).destroy_all
