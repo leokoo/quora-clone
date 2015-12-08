@@ -1,10 +1,10 @@
 # To upvote
 post "/questions/:id/upvote" do
 	question = Question.find(params[:id])
-	question.votes.create_with(vote_count: 1).find_or_create_by(user_id: session[:user_id]).update(vote_count: 1)
+	question = question.votes.create_with(vote_count: 1).find_or_create_by(user_id: session[:user_id]).update(vote_count: 1)
 	# question_vote = Vote.create(user_id: session[:user_id], question_id: params[:id], vote_count: 1)
 	erb :'questions/all'
-	# question_vote.vote_count.to_json
+	# question.vote_count.to_json
 end
 
 # To downvote
